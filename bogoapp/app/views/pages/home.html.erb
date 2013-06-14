@@ -50,7 +50,35 @@
     </div>
     <div class="span8">
 
-      <h3>Average savings is 43%.</h3>
+      <h3>Average savings: <%= number_to_percentage total_average.ceil, precision: 0 %>.</h3>
+
+      <h3>Recent Transactions</h3>
+
+      <div class="transaction-form-container">
+
+        <%= form_for @transaction, html: {class: "form-inline"} do |f| %>
+          <div class="input-prepend">
+          <span class="add-on"><i class="icon-calendar"></i></span>
+          <%= f.text_field :date, id: "datepicker", class: "input-small", placeholder: "Date" %>
+          </div>
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            <%= f.text_field :spent, placeholder: "Spent", class: "input-small" %>
+          </div>
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            <%= f.text_field :saved, placeholder: "Saved", class: "input-small" %>
+          </div>
+          <%= f.submit "Add Transaction", class: "btn" %>
+        <% end %>
+      </div>
+
+
+      <% for transaction in @recent_transactions %>
+        <p>You spent <%=  transaction.spent %> and saved <%= transaction.saved %> on <%= transaction.date.strftime("%b %-d, %Y") %> saving <%= number_to_percentage transaction.average_savings_per_transaction %>.</p>
+      <% end %>
+
+      
 
       <h3>Recent Activity</h3>
       <% for note in @home_feed %>

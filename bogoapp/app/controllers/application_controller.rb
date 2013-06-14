@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+
+  def total_average
+    totals = Transaction.sum(:spent) + Transaction.sum(:saved)
+    averages = Transaction.sum(:saved) / totals * 100
+  end
+  helper_method :total_average
+
   def check_sign_in
   	unless user_signed_in?
   		redirect_to root_path

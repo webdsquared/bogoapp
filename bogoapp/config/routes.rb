@@ -1,4 +1,7 @@
 Bogoapp::Application.routes.draw do
+  resources :transactions
+
+
   resources :notes
 
 

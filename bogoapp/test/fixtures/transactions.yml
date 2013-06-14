@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  spent: 9.99
+  saved: 9.99
+  date: 2013-06-14 07:17:00
+
+two:
+  spent: 9.99
+  saved: 9.99
+  date: 2013-06-14 07:17:00
