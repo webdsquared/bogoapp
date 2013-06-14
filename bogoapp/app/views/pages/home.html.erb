@@ -1,0 +1,91 @@
+<% if user_signed_in? %>
+
+
+<% @user ||= current_user %>
+
+<div class="hm-header">
+  <div class="container-narrow">
+    <h4><%= link_to_unless_current "Home", root_path %> | <%= link_to "Profile", current_user %> | <%= link_to "Sign out", signout_path, id: "sign_out" %></h4>
+  </div>
+</div>
+
+<div class="container-narrow">
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="hm-profile-container">
+        <%= @user.name %><br>
+        Member Since: <%= @user.created_at.strftime("%B %-d, %Y") %>
+        <div class="stats">
+          <a href="<%= following_user_path(@user) %>">
+          <strong id="following" class="stat">
+          <%= @user.followed_users.count %>
+          </strong>
+          following
+          </a>
+          <a href="<%= followers_user_path(@user) %>">
+          <strong id="followers" class="stat">
+          <%= @user.followers.count %>
+          </strong>
+          followers
+          </a>
+          <br>
+          Posts: <%= current_user.notes.count %>
+        </div>
+      </div>
+      <div class="note-container">
+        <h3>Add a note:</h3>
+        <%= form_for @note do |f| %>
+          <%= f.text_area :content, placeholder: "Add a new note...", rows: 2 %><br>
+          <%= f.submit "Add Note", class: "btn btn-small btn-primary" %>
+        <% end %>
+      </div>
+      <div class="lists-container">
+        <h3>My Lists</h3>
+        <ul>
+          <li>Publix</li>
+          <li>Kroger</li>
+          <li>Walgreens</li>
+        </ul>
+      </div>
+    </div>
+    <div class="span8">
+
+      <h3>Average savings is 43%.</h3>
+
+      <h3>Recent Activity</h3>
+      <% for note in @home_feed %>
+        <p><%= note.content %><br>
+        <em>Created by <%= link_to note.user.name %> <%= time_ago_in_words(note.created_at) %> ago</em>. </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% else %>
+
+<div id="user_nav">
+  <% if current_user %>
+    Signed in as <strong><%= current_user.name %></strong>! | 
+    <%= link_to "View Profile", current_user %> | 
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+</div>
+Don't user facebook? 
+<%= link_to "Create an account", new_identity_path %> or login below.
+
+Sign in with email and password...
+
+<%= form_tag "/auth/identity/callback" do %>
+  <div class="field">
+    <%= label_tag :auth_key, "Email" %><br>
+    <%= text_field_tag :auth_key %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password %>
+  </div>
+  <div class="actions"><%= submit_tag "Login" %></div>
+<% end %>
+
+<% end %>

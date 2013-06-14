@@ -1,4 +1,24 @@
 Bogoapp::Application.routes.draw do
+  resources :notes
+
+
+  get "users/show"
+
+  resources :identities
+
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+
+  root to: "pages#home"
+
+  resources :relationships, only: [:create, :destroy]
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
