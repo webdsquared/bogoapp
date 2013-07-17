@@ -1,31 +1,57 @@
-<h1>New Account</h1>
 
-<%= form_tag "/auth/identity/register" do %>
-  <% if @identity && @identity.errors.any? %>
-    <div class="error_messages">
-      <h2><%= pluralize(@identity.errors.count, "error") %> prohibited this account from being saved:</h2>
-      <ul>
-      <% @identity.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+
+<div class="signup-form-container">
+  <div class="sign-up-top">
+    <h3>Create your Bogofy account.<a class="close" href="/">&times;</a></h3>
+    <p>Already have an account? <%= link_to "Sign In", sign_in_path, class: "green-link" %></p>
+  </div>
+  <div class="sign-up-bottom">
+    <%= form_tag "/auth/identity/register", class: "form-horizontal", autocomplete: "off" do %>
+      <% if @identity && @identity.errors.any? %>
+      <div class="error_messages">
+        <h2><%= pluralize(@identity.errors.count, "error") %> prohibited this account from being saved:</h2>
+        <ul>
+          <% @identity.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= label_tag :name %><br>
-    <%= text_field_tag :name, @identity.try(:name) %>
+      <div class="control-group">
+        <label class="control-label">Name</label>
+        <div class="controls">
+          <%= text_field_tag :name, @identity.try(:name) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Email</label>
+        <div class="controls">
+          <%= text_field_tag :email, @identity.try(:email) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Password</label>
+        <div class="controls">
+          <%= password_field_tag :password %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Confirm Password</label>
+        <div class="controls">
+          <%= password_field_tag :password_confirmation %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+          <small class="small-signup">By creating an account you agree to our <%= link_to "terms of service", "#", class: "green-link" %>.</small>
+          <div class="signup-submit">
+            <%= submit_tag "Sign Up", class: "note-green-btn" %>
+            <span class="or">or</span>
+            <%= link_to "Sign up with Facebook", "/auth/facebook", class: "signin-fb-btn" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= label_tag :email %><br>
-    <%= text_field_tag :email, @identity.try(:email) %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="field">
-    <%= label_tag :password_confirmation %><br>
-    <%= password_field_tag :password_confirmation %>
-  </div>
-  <div class="actions"><%= submit_tag "Register" %></div>
-<% end %>
+</div>

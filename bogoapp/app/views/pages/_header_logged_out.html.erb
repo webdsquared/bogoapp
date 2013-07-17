@@ -1,0 +1,46 @@
+<div class="alt-header">
+  <div class="row-fluid">
+    <div class="span6">
+      <ul class="inline header-nav">
+        <li><h4 class="logo">BOGO<span class="white">FY</span></h4></li>
+        <li><h4><%= link_to "Tour", root_path, class: "header-link" %></h4></li>
+        <li><h4><%= link_to "Blog", root_path, class: "header-link" %></h4></li>
+        <li><h4><%= link_to "About", root_path, class: "header-link" %></h4></li>
+      </ul>
+    </div>
+    <div class="span6">
+      <h4 class="white pull-right light">
+        <ul class="inline">
+          <li><%= link_to "Sign Up", new_account_path, class: "green-link" %></li>
+          <!--<li class="divider-vertical"></li>-->
+          <li><span class="green">|</span></li>
+          <li class="dropdown arrow-right-signin">
+            <%= link_to "Sign In", "#", data: { toggle: "dropdown" }, class: "green-link" %>
+            <strong class="caret"></strong>
+            <div class="dropdown-menu", style="margin-top:22px;">
+              <div class="dropdown-signin">
+                <!-- Sign in Form -->
+                <%= form_tag "/auth/identity/callback", autocomplete: "off" do %>
+                  <div class="list-input">
+                    <label>Email</label>
+                    <%= text_field_tag :auth_key %>
+                  </div>
+                  <div class="list-input">
+                    <label>Password</label>
+                    <%= password_field_tag :password %>
+                  </div>
+                  <div class="submit-container">
+                    <%= submit_tag "Login", class: "note-green-btn-signin btn-block" %>
+                    <p class="or">or</p>
+                    <%= link_to "Sign in with Facebook", "/auth/facebook", class: "signin-fb-btn btn-block" %>
+                  </div>
+                  
+                <% end %>
+            </div>
+          </li>
+        </ul>
+        
+      </h4>
+    </div>
+  </div>
+</div>

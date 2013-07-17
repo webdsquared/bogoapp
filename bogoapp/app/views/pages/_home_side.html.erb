@@ -1,0 +1,109 @@
+<div class="hm-side-container">
+  <div class="side-box-container">
+    <div class="box-header">
+    <p class="box-header-text">My Profile</p>
+  </div>
+  <div class="profile-container">
+  <%= @user.name %><br>
+  <%= link_to "View my profile", @user %><br>
+    <a href="<%= following_user_path(@user) %>">
+    <strong id="following" class="stat">
+    <%= @user.followed_users.count %>
+    </strong>
+    following
+    </a>
+    <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers" class="stat">
+    <%= @user.followers.count %>
+    </strong>
+    followers
+    </a>
+    <br>
+    Posts: <%= current_user.notes.count %><br>
+    Average Savings: <%= number_to_percentage total_average.ceil, precision: 0 %>
+  
+
+  <h4>Add a note:</h4>
+  <%= form_for @note, id: "note-form" do |f| %>
+    <%= f.text_area :content, placeholder: "Add a new note...", rows: 1, id: "txtComment" %><br>
+    <div class="note-btn">
+      <%= f.submit "Add Note", class: "btn btn-small btn-primary enableOnInput", id: "note-dis", disabled: "disabled" %>
+      &nbsp;&nbsp;&nbsp;<span class="counter"></span>
+
+    </div>
+  <% end %>
+  
+</div>
+</div>
+
+<div class="side-box-container">
+  <div class="box-header">
+    <p class="box-header-text">My Lists | <span id="add-list-link">Add List</span>
+    </p>
+  </div>
+  
+  
+  <div class="add-list">
+    <%= form_for @list, html: { class: "form-inline" } do |f| %>
+      <%= f.text_field :name, placeholder: "List", class: "input-medium" %>
+      <a class="close" href="#" id="close-add-list">&times;</a>
+      <%= f.submit "Add", class: "btn" %>
+    <% end %>
+  </div>
+
+
+  <div class="shopping-lists-container">
+  <% for list in @shopping_lists %>
+  <% if @shopping_lists.present? %> 
+    <% if list.items.count > 1 %>
+    <p>
+      <%= link_to list.name, list %> (<%= list.items.count %> <%= "Item".pluralize %>)
+      <%= link_to "Edit", list, class: "lite-link" %>
+    </p> 
+    <% elsif list.items.count == 1 %>
+    <p>
+      <%= link_to list.name, list %> (<%= list.items.count %> Item)
+      <%= link_to "Edit", list, class: "lite-link" %>
+    </p>
+    <% elsif list.items.count == 0 %>
+    <p>
+      <%= link_to list.name, list %> (<%= list.items.count %> <%= "Item".pluralize %>)
+      <%= link_to "Edit", list, class: "lite-link" %>
+    </p>
+    <% end %>
+  <% else %>
+  <p>You currently have no shopping lists created.</p>
+  <% end %>
+  <% end %>
+
+
+  <!-- WORKING ON REMOTE GROCERY LISTS -->
+
+
+  </div>
+</div>
+
+
+<div class="side-box-container">
+
+  <div class="box-header">
+    <p class="box-header-text">Quick Links | <span id="add-link">Add Link</span></p>
+  </div>
+  
+  <div class="add-link-container">
+    <%= form_for @link, html: { class: "form-inline" } do |f| %>
+      <%= f.text_field :link_name, placeholder: "Link Name", class: "input-medium" %>
+      <a class="close" href="#" id="close-add-link">&times;</a>
+      <%= f.text_field :link_url, placeholder: "URL", class: "input-medium" %>
+
+      <br>
+      <%= f.submit "Add Link", class: "btn" %>
+    <% end %>
+  </div> 
+  <div class="links-container">
+  <% for link in @link_list %>
+    <p><%= link_to link.link_name, link.link_url, target: "_blank" %></p>
+  <% end %>
+  </div>
+</div>
+</div>

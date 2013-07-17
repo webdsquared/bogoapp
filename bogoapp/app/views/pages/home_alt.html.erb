@@ -1,0 +1,84 @@
+
+<% if user_signed_in? %>
+
+
+<% @user ||= current_user %>
+
+<div class="hm-header">
+  
+    <h4><%= link_to_unless_current "Home", root_path %> | <%= link_to "Profile", current_user %> | <%= link_to "Sign out", signout_path, id: "sign_out" %></h4>
+  
+</div>
+
+<div class="container-narrow hm-main-container">
+  <div class="row-fluid">
+    <div class="span4">
+      <%= render "home_side" %>
+    </div>
+    <div class="span8">
+      <%= render "home_main" %>
+    </div>
+  </div>
+</div>
+<% else %>
+
+
+<div class="home-basic">
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      <h1>Bogofy</h1>
+      <h3>The social media app for couponers.</h3>
+      <p>Track, update, and share with friends and others about your couponing expertise or valuable coupons.</p>
+      <%= link_to "JOIN NOW", new_identity_path, class: "btn btn-large" %>
+      <%= link_to "LOGIN", "#", class: "btn btn-large" %>
+      <br><br>
+      <p>Sign in with <%= link_to "Facebook", "/auth/facebook", id: "sign_in" %>.</p>
+    </div>
+    <div class="span6">
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="clouds-container">
+  <div class="top-border">
+    &nbsp;
+  </div>
+  <div class="cloud">
+
+   <div class="container">
+<div id="user_nav">
+  <% if current_user %>
+    Signed in as <strong><%= current_user.name %></strong>! | 
+    <%= link_to "View Profile", current_user %> | 
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+</div>
+Don't use facebook? 
+<%= link_to "Create an account", new_identity_path %> or login below.
+
+Sign in with email and password...
+
+<%= form_tag "/auth/identity/callback" do %>
+  <div class="field">
+    <%= label_tag :auth_key, "Email" %><br>
+    <%= text_field_tag :auth_key %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password %>
+  </div>
+  <div class="actions"><%= submit_tag "Login" %></div>
+<% end %>
+</div>
+  </div>
+</div>
+</div>
+
+
+<% end %>

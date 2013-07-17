@@ -1,12 +1,27 @@
 Bogoapp::Application.routes.draw do
+
+
+
+  resources :links
+
+
+  resources :lists do
+    resources :items
+  end
+
+
   resources :transactions
 
 
   resources :notes
 
 
+  get "pages/sign_in"
+  match 'sign-in', to: 'pages#sign_in', as: 'sign_in'
+  get "pages/home_alt"
   get "users/show"
 
+  match 'sign-up', to: 'identities#new', as: 'new_account'
   resources :identities
 
   match 'auth/:provider/callback', to: 'sessions#create'

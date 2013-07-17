@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
 
 
   def total_average
-    totals = Transaction.sum(:spent) + Transaction.sum(:saved)
-    averages = Transaction.sum(:saved) / totals * 100
+    totals = current_user.transactions.sum(:spent) + current_user.transactions.sum(:saved)
+    averages = current_user.transactions.sum(:saved) / totals * 100
   end
   helper_method :total_average
 

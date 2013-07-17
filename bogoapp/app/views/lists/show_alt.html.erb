@@ -1,0 +1,80 @@
+<% @user ||= current_user %>
+<div class="hm-header">
+  <div class="container-narrow">
+    <h4><%= link_to_unless_current "Home", root_path %> | <%= link_to "Profile", current_user %> | <%= link_to "Sign out", signout_path, id: "sign_out" %></h4>
+  </div>
+</div>
+<div class="container-narrow">
+  <div class="row-fluid">
+    <div class="span4">
+
+      <div class="side-box-container">
+        <%= @user.name %><br>
+        <%= link_to "View my profile", @user %><br>
+        <a href="<%= following_user_path(@user) %>">
+        <strong id="following" class="stat">
+        <%= @user.followed_users.count %>
+        </strong>
+        following
+        </a>
+        <a href="<%= followers_user_path(@user) %>">
+        <strong id="followers" class="stat">
+        <%= @user.followers.count %>
+        </strong>
+        followers
+        </a>
+        <br>
+        Posts: <%= current_user.notes.count %><br>
+        Average Savings: <%= number_to_percentage total_average.ceil, precision: 0 %>
+      </div>
+      
+      <div class="side-box-container">
+        <div class="box-header">
+          <p class="box-header-text">My Lists | <span id="add-list-link">Add List</span></p>
+        </div>
+  
+  
+        <div class="add-list">
+          <%= form_for @list, html: { class: "form-inline" } do |f| %>
+          <%= f.text_field :name, placeholder: "List", class: "input-medium" %>
+          <%= f.submit "Add List", class: "btn" %>
+          <% end %>
+        </div>
+
+
+        <div class="shopping-lists-container">
+          <% for list in @shopping_lists %>
+            <% if @shopping_lists.present? %> 
+            <% if list.items.count > 1 %>
+            <p>
+              <%= link_to list.name, list %> (<%= list.items.count %> <%= "Item".pluralize %>)
+              <%= link_to "Edit", "#", class: "lite-link" %>
+            </p> 
+            <% elsif list.items.count == 1 %>
+            <p><%= link_to list.name, list %> (<%= list.items.count %> Item)</p>
+            <% elsif list.items.count == 0 %>
+            <p><%= link_to list.name, list %> (<%= list.items.count %> <%= "Item".pluralize %>        )</p>
+            <% end %>
+            <% else %>
+            <p>You currently have no shopping lists created.</p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      
+      
+    </div>
+    <div class="span8">
+    	<h3><%= @list.name %></h3>
+
+    	<%= form_for([@list, @list.items.build], remote: true) do |f| %>
+    		<%= f.text_field :name, placeholder: "Add item...", class: "input-xxlarge" %><br>
+    		<%= f.submit "Add Item", class: "btn" %>
+    	<% end %>
+
+      <div id="items">
+        <%= render @list.items %>
+      </div>
+    </div>
+  </div>
+</div>

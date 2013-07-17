@@ -1,0 +1,80 @@
+<% @user ||= current_user %>
+
+<div class="alt-pg-container">
+  <%= render "pages/header_logged_in" %>
+
+  <div class="container-narrow">
+    <div class="alt-profile-container-1">
+      <div class="row-fluid">
+        <div class="span6">
+          <%= image_tag "bogologo.jpg", class: "profile-img" %>
+          <h3><%= current_user.name %></h3>
+          <p class="town">Spring Hill, TN</p>
+        </div>
+        <div class="span6">
+          <ul class="inline pull-right">
+            <li>
+              <div class="profile-list-borderless">
+                <h3 class=""><%= current_user.notes.count %></h3>
+                <p>Notes</p>
+              </div>
+            </li>
+            <li>
+              <div class="profile-list">
+                <h3><%= @user.followed_users.count %></h3>
+                <p>Following</p>
+              </div>
+            </li>
+            <li>
+              <div class="profile-list">
+                <h3><%= @user.followers.count %></h3>
+                <p>Followers</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-narrow">
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <h4>Shopping Lists</h4>
+          </div>
+          <div id="shopping-list-show-pg" class="alt-shopping-list-container">
+            <%= render "items/show_list" %>
+          </div>
+        </div>
+      </div>
+      <div class="span8">
+        <div class="alt-dashbox-1">
+          <div class="alt-dashbox-title-1">
+            <h2><%= @list.name %></h4>
+          </div>
+          <div class="alt-shopping-list-items">
+            <%= form_for([@list, @list.items.build], remote: true) do |f| %>
+              <div class="item-list-input">
+                <%= f.text_field :name, placeholder: "Add item...", class: "input-block-level", autofocus: true %>
+              </div>
+              <div class="hide-submit">
+                <%= f.submit "Add Item", class: "note-green-btn" %>
+              </div>
+            <% end %>
+            <div id="items" class="items-list-con">
+              <ul>
+                <%= render @list.items %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

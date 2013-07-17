@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap-datepicker
 //= require twitter/bootstrap
+//= require linker
 //= require_tree .

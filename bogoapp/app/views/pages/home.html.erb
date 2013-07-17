@@ -1,119 +1,271 @@
 <% if user_signed_in? %>
-
-
 <% @user ||= current_user %>
-
-<div class="hm-header">
+<div class="alt-pg-container">
+  <%= render "header_logged_in" %>
+  
   <div class="container-narrow">
-    <h4><%= link_to_unless_current "Home", root_path %> | <%= link_to "Profile", current_user %> | <%= link_to "Sign out", signout_path, id: "sign_out" %></h4>
-  </div>
-</div>
-
-<div class="container-narrow">
-  <div class="row-fluid">
-    <div class="span4">
-      <div class="hm-profile-container">
-        <%= @user.name %><br>
-        Member Since: <%= @user.created_at.strftime("%B %-d, %Y") %>
-        <div class="stats">
-          <a href="<%= following_user_path(@user) %>">
-          <strong id="following" class="stat">
-          <%= @user.followed_users.count %>
-          </strong>
-          following
-          </a>
-          <a href="<%= followers_user_path(@user) %>">
-          <strong id="followers" class="stat">
-          <%= @user.followers.count %>
-          </strong>
-          followers
-          </a>
-          <br>
-          Posts: <%= current_user.notes.count %>
+    <div class="alt-profile-container-top">
+      <div class="row-fluid">
+        <div class="span6">
+          <%= image_tag "bogologo.jpg", class: "profile-img" %>
+          <h3><%= current_user.name %></h3>
+          <p class="town">Spring Hill, TN</p>
+        </div>
+        <div class="span6">
+          <ul class="inline pull-right">
+            <li>
+              <div class="profile-list-borderless">
+                <h3 class=""><%= current_user.notes.count %></h3>
+                <p>Notes</p>
+              </div>
+            </li>
+            <li>
+              <div class="profile-list">
+                <h3><%= @user.followed_users.count %></h3>
+                <p>Following</p>
+              </div>
+            </li>
+            <li>
+              <div class="profile-list">
+                <h3><%= @user.followers.count %></h3>
+                <p>Followers</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="note-container">
-        <h3>Add a note:</h3>
-        <%= form_for @note do |f| %>
-          <%= f.text_area :content, placeholder: "Add a new note...", rows: 2 %><br>
-          <%= f.submit "Add Note", class: "btn btn-small btn-primary" %>
-        <% end %>
-      </div>
-      <div class="lists-container">
-        <h3>My Lists</h3>
-        <ul>
-          <li>Publix</li>
-          <li>Kroger</li>
-          <li>Walgreens</li>
-        </ul>
+    </div>
+    <div class="alt-profile-container-bottom">
+      <div class="row-fluid">
+        <div class="span8">
+          <%= form_for @note, id: "note-form" do |f| %>
+            <%= f.text_area :content, placeholder: "Add a note...", rows: 3, id: "noteContent", class: "input-block-level" %>
+          <div class="note-submit">
+            <%= f.submit "Add Note", class: "note-green-btn enableOnInput", id: "note-dis", disabled: "disabled" %>
+            <span class="counter pull-right count-number"></span>
+          </div>
+          <% end %>
+        </div>
+        <div class="span4 savings">
+          <p>Average Savings:</p>
+          <h3><%= number_to_percentage total_average.ceil, precision: 0 %></h3>
+        </div>
       </div>
     </div>
-    <div class="span8">
-
-      <h3>Average savings: <%= number_to_percentage total_average.ceil, precision: 0 %>.</h3>
-
-      <h3>Recent Transactions</h3>
-
-      <div class="transaction-form-container">
-
-        <%= form_for @transaction, html: {class: "form-inline"} do |f| %>
-          <div class="input-prepend">
-          <span class="add-on"><i class="icon-calendar"></i></span>
-          <%= f.text_field :date, id: "datepicker", class: "input-small", placeholder: "Date" %>
+  </div>
+  <div class="container-narrow">
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <div class="row-fluid">
+              <div class="span8">
+                <h4>Shopping Lists</h4>
+              </div>
+              <div class="span4 dropdown arrow-right">
+                <a class="dropdown-toggle add-button pull-right" data-toggle="dropdown" href="#"><i class="icon-plus"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                  <div class="dropdown1-container">
+                    <%= form_for @list, html: { class: "form-inline", id: "list-form" } do |f| %>
+                      <div class="list-input">
+                        <label>List Name</label>
+                        <%= f.text_field :name, placeholder: "List Name" %>
+                      </div>
+                      <div class="submit-container">
+                        <%= f.submit "Add List", class: "note-green-btn" %><span class="pull-right cancel-link"><%= link_to "Cancel", "#", class: "cancel" %></span>
+                      </div>
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+              </div>
+            </div>    
           </div>
-          <div class="input-prepend">
-            <span class="add-on">$</span>
-            <%= f.text_field :spent, placeholder: "Spent", class: "input-small" %>
+          <div class="alt-shopping-list-container">
+            <ul>
+            <% for list in @shopping_lists %>
+              <% if list.items.count > 1 %>
+                <li>
+                <%= link_to list.name, list, class: "dark-link" %>
+                <span class="item-count">(<%= list.items.count %> <%= "Item".pluralize %>)</span>
+                <span class="pull-right">
+                  <%= link_to list, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+              <% elsif list.items.count == 1 %>
+                <li>
+                <%= link_to list.name, list, class: "dark-link" %>
+                <span class="item-count">(<%= list.items.count %> Item)</span>
+                <span class="pull-right">
+                  <%= link_to list, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+              <% elsif list.items.count == 0 %>
+                <li>
+                <%= link_to list.name, list, class: "dark-link" %>
+                <span class="item-count">(<%= list.items.count %> <%= "Item".pluralize %>)</span>
+                <span class="pull-right">
+                  <%= link_to list, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li> 
+              <% end %>
+              
+            <% end %>
+            </ul>
           </div>
-          <div class="input-prepend">
-            <span class="add-on">$</span>
-            <%= f.text_field :saved, placeholder: "Saved", class: "input-small" %>
+        </div>
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <div class="row-fluid">
+              <div class="span8">
+                <h4>Quick Links</h4>
+              </div>
+              <div class="span4 dropdown arrow-right">
+                <a class="dropdown-toggle add-button pull-right" data-toggle="dropdown" href="#"><i class="icon-plus"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li>
+                    <div class="dropdown1-container">
+                      <%= form_for @link, html: { class: "form-inline", id: "list-form" } do |f| %>
+                      <div class="list-input">
+                        <label>Link Name</label>
+                        <%= f.text_field :link_name, placeholder: "Link Name" %>
+                      </div>
+                      <div class="list-input">
+                        <label>Link URL</label>
+                        <%= f.text_field :link_url, placeholder: "http://example.com" %>
+                      </div>
+                      <div class="submit-container">
+                        <%= f.submit "Add Link", class: "note-green-btn" %>
+                        <span class="pull-right cancel-link"><%= link_to "Cancel", "#", class: "cancel" %>
+                        </span>
+                      </div>
+                      <% end %>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <%= f.submit "Add Transaction", class: "btn" %>
-        <% end %>
+          <div class="alt-quick-link-container">
+            <ul>
+            <% for link in @link_list %>
+              <li>
+                <%= link_to link.link_name, link.link_url, target: "_blank", class: "dark-link" %>
+                <span class="pull-right">
+                  <%= link_to link, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
       </div>
-
-
-      <% for transaction in @recent_transactions %>
-        <p>You spent <%=  transaction.spent %> and saved <%= transaction.saved %> on <%= transaction.date.strftime("%b %-d, %Y") %> saving <%= number_to_percentage transaction.average_savings_per_transaction %>.</p>
-      <% end %>
-
-      
-
-      <h3>Recent Activity</h3>
-      <% for note in @home_feed %>
-        <p><%= note.content %><br>
-        <em>Created by <%= link_to note.user.name %> <%= time_ago_in_words(note.created_at) %> ago</em>. </p>
-      <% end %>
+      <div class="span8">
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <div class="row-fluid">
+              <div class="span8">
+                <h4>Recent Transactions</h4>
+              </div>
+              <div class="span4 dropdown arrow-right">
+                <a class="dropdown-toggle add-button pull-right" data-toggle="dropdown" href="#"><i class="icon-plus"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li>
+                    <div class="dropdown1-container">
+                      <%= form_for @transaction, html: {id: "list-form"} do |f| %>
+                        <div class="list-input input-prepend">
+                          <label>Transaction Date</label>
+                          <div class="input-prepend">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                            <%= f.text_field :date, id: "datepicker", placeholder: "Date" %>
+                          </div>
+                        </div>
+                        <div class="list-input">
+                          <label>Amount Spent</label>
+                          <div class="input-prepend">
+                            <span class="add-on">$</span>
+                            <%= f.text_field :spent, placeholder: "Spent" %>
+                          </div>
+                        </div>
+                        <div class="list-input input-prepend">
+                          <label>Amount Saved</label>
+                          <div class="input-prepend">
+                            <span class="add-on">$</span>
+                            <%= f.text_field :saved, placeholder: "Saved" %>
+                          </div>
+                        </div>
+                        <div class="submit-container">
+                          <%= f.submit "Add Transaction", class: "note-green-btn" %><span class="pull-right cancel-link"><%= link_to "Cancel", "#", class: "cancel" %></span>
+                        </div>
+                      <% end %>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="alt-recent-transaction-list">
+            <ul>
+            <% for transaction in @recent_transactions %>
+              <li>
+                You spent <span class="transaction-list-bold"><%= number_to_currency transaction.spent %></span> at Piggly Wiggly on <%= transaction.date.strftime("%b %-d") %> and saved <span class="transaction-list-bold"><%= number_to_currency transaction.saved %></span> (<span class="transaction-list-green"><%= number_to_percentage transaction.average_savings_per_transaction.ceil, precision: 0 %></span>).
+              </li>
+            <% end %>
+            </ul>
+            <div class="transaction-all">
+              <p><%= link_to "View all transactions", "#", class: "green-link" %></p>
+            </div>
+          </div>
+        </div>
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <h4>Recent Activity</h4>
+          </div>
+          <div class="alt-activity-container">
+            <!-- RECENT ACTIVITY FEED -->
+            <% for note in @home_feed %>
+            <div class="alt-note-container">
+              <div class="row-fluid">
+                <div class="span1">
+                  <%= image_tag "bogologo.jpg", size: "40x40" %>
+                </div>
+                <div class="span11 recent-note">
+                  <h5>
+                    <%= link_to note.user.name, user_path(@user), class: "note-name" %>
+                    <span class="pull-right gray-time"><%= time_ago_in_words(note.created_at) %></span>
+                  </h5>
+                    <p class="text"><%= note.content %></p>
+                    <div class="note-nav">
+                      <% if note.user == current_user %>
+                      <span class="gray"><%= link_to(raw('<i class="icon-trash"></i> Delete'), "#", class: "dark-link") %></span>
+                      <% else %>
+                      <span class="gray"><i class="icon-share-alt"></i> Reply</span>
+                      <span class="icon-pad"></span>
+                      <% end %>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <% else %>
-
-<div id="user_nav">
-  <% if current_user %>
-    Signed in as <strong><%= current_user.name %></strong>! | 
-    <%= link_to "View Profile", current_user %> | 
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
+<div class="alt-pg-container">
+<%= render "header_logged_out" %>
+<h3>You need to login!</h3>
 </div>
-Don't user facebook? 
-<%= link_to "Create an account", new_identity_path %> or login below.
-
-Sign in with email and password...
-
-<%= form_tag "/auth/identity/callback" do %>
-  <div class="field">
-    <%= label_tag :auth_key, "Email" %><br>
-    <%= text_field_tag :auth_key %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions"><%= submit_tag "Login" %></div>
-<% end %>
-
 <% end %>

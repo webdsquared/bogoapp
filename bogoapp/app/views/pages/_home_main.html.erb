@@ -1,0 +1,49 @@
+<div class="side-box-container">
+  <div class="box-header">
+    <p class="box-header-text">Recent Transactions | <%= link_to "View all", transactions_path %></p>
+  </div>
+
+      <h4 id="add-transaction-link">Add Transaction</h4>
+      <div class="transaction-form-container">
+        <br>
+        
+        <%= form_for @transaction, html: {class: "form-inline"} do |f| %>
+          <div class="input-prepend">
+          <span class="add-on"><i class="icon-calendar"></i></span>
+          <%= f.text_field :date, id: "datepicker", class: "input-small", placeholder: "Date" %>
+          </div>
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            <%= f.text_field :spent, placeholder: "Spent", class: "input-small" %>
+          </div>
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            <%= f.text_field :saved, placeholder: "Saved", class: "input-small" %>
+          </div>
+          <%= f.submit "Submit", class: "btn" %>
+        <% end %>
+      </div>
+      <div class="transaction-list-container">
+      <% for transaction in @recent_transactions %>
+        <p>You spent <%=  transaction.spent %> and saved <%= transaction.saved %> on <%= transaction.date.strftime("%b %-d, %Y") %> saving <%= number_to_percentage transaction.average_savings_per_transaction %>.</p>
+      <% end %>
+      </div>
+</div>
+<div class="side-box-container">
+  <div class="box-header">
+    <p class="box-header-text">Recent Activity</p>
+  </div>
+      <% for note in @home_feed %>
+      <div class="note-container">
+        <div class="row-fluid">
+          <div class="span6">
+            <p class="note-name"><%= link_to note.user.name %></p>
+          </div>
+          <div class="span6">
+            <p class="note-time pull-right"><%= time_ago_in_words(note.created_at) %></p>
+          </div>
+        </div>
+        <p><%= note.content %></p>
+      </div>
+      <% end %>
+    </div>

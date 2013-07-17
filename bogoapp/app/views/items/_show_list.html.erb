@@ -1,0 +1,35 @@
+<ul>
+  <% for list in @shopping_lists %>
+    <% if list.items.count > 1 %>
+    <li>
+    <%= link_to list.name, list, class: "dark-link" %>
+    <span class="item-count">(<%= list.items.count %> <%= "Item".pluralize %>)</span>
+    <span class="pull-right">
+      <%= link_to list, method: :delete do %>
+        <i class="icon-remove gray"></i>
+      <% end %>
+    </span>
+    </li>
+    <% elsif list.items.count == 1 %>
+    <li>
+    <%= link_to list.name, list, class: "dark-link" %>
+    <span class="item-count">(<%= list.items.count %> Item)</span>
+    <span class="pull-right">
+      <%= link_to list, method: :delete do %>
+        <i class="icon-remove gray"></i>
+      <% end %>
+    </span>
+    </li>
+    <% elsif list.items.count == 0 %>
+    <li>
+    <%= link_to list.name, list, class: "dark-link" %>
+    <span class="item-count">(<%= list.items.count %> <%= "Item".pluralize %>)</span>
+    <span class="pull-right">
+      <%= link_to list, method: :delete do %>
+        <i class="icon-remove gray"></i>
+      <% end %>
+    </span>
+    </li> 
+    <% end %>
+  <% end %>
+</ul>
