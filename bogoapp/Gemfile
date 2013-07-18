@@ -28,6 +28,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-identity'
 gem 'bootstrap-datepicker-rails'
 gem 'rinku', '~> 1.2.2', :require => 'rails_rinku'
+gem 'prawn'
 # gem "rails_autolink", "~> 1.1.0"
 
 # To use ActiveModel has_secure_password

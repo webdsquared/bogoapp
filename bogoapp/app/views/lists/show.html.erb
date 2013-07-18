@@ -48,16 +48,53 @@
             <%= render "items/show_list" %>
           </div>
         </div>
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <h4>Quick Links</h4>
+          </div>
+          <div class="alt-quick-link-container">
+            <ul>
+            <% for link in @link_list %>
+              <li>
+                <%= link_to link.link_name, link.link_url, target: "_blank", class: "dark-link" %>
+                <span class="pull-right">
+                  <%= link_to link, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+
       </div>
       <div class="span8">
         <div class="alt-dashbox-1">
           <div class="alt-dashbox-title-1">
-            <h2><%= @list.name %></h4>
+
+            <h2><%= @list.name %></h2>
+
           </div>
           <div class="alt-shopping-list-items">
+            <div class="export-container">
+              <div class="pull-right icon-tab">
+                <%= link_to(list_path(@list, format: "pdf"), class: "pdf") do %>
+                <i class="icon-print"></i>
+                <% end %>
+              </div>
+              <div class="pull-right icon-tab">
+                <i class="icon-envelope"></i>
+              </div>
+            </div>
+
             <%= form_for([@list, @list.items.build], remote: true) do |f| %>
               <div class="item-list-input">
-                <%= f.text_field :name, placeholder: "Add item...", class: "input-block-level", autofocus: true %>
+                <%= f.text_field :name, placeholder: "Add item...", class: "input-block-level lister", autofocus: true, autocomplete: "off" %>
               </div>
               <div class="hide-submit">
                 <%= f.submit "Add Item", class: "note-green-btn" %>
@@ -68,12 +105,14 @@
                 <%= render @list.items %>
               </ul>
             </div>
+            <div id="print-code">
+              <p><%= link_to "Printable Shopping List (PDF)", list_path(@list, format: "pdf") %></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
 
 

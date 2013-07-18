@@ -3,6 +3,11 @@
     <div class="span6">
       <ul class="inline header-nav">
         <li><h4 class="logo">BOGO<span class="white">FY</span></h4></li>
+        <li>
+          <%= link_to(root_path, class: "header-link") do %>
+            <i class="icon-home icon-large"></i>
+          <% end %>
+        </li>
         <li><h4><%= link_to "Tour", root_path, class: "header-link" %></h4></li>
         <li><h4><%= link_to "Blog", root_path, class: "header-link" %></h4></li>
         <li><h4><%= link_to "About", root_path, class: "header-link" %></h4></li>

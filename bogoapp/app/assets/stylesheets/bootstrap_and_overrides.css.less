@@ -310,6 +310,8 @@ a.green-link:focus { outline:none; }
      -moz-background-clip: padding;
           background-clip: padding-box; 
 }
+a.pdf:link, a.pdf:visited { color:#999;text-decoration:none; }
+a.pdf:hover, a.pdf:active { color:#e7e7e7;text-decoration:none; }
 
 a.close:link, a.close:visited { color:#e7e7e7;text-decoration:none; }
 a.cancel:link, a.cancel:visited { color:#999;text-decoration:none; }
@@ -406,24 +408,47 @@ a.note-name:hover { text-decoration:underline;color:#363E45;}
 
 /* LIST SHOW PAGE */
 .alt-profile-container-1 { background:white;border:1px solid #e0e0e0;border-radius:7px;margin-top:20px;margin-bottom:0; padding:20px;margin-bottom:20px; }
-.alt-shopping-list-items { margin-top:15px;padding-bottom:20px; }
+.alt-shopping-list-items { border-bottom-right-radius:7px;border-bottom-left-radius:7px;padding-bottom:20px;background:#FFFA9B; }
 .hide-submit { display:hidden; }
-li.list-item-style { border-bottom:1px solid #efefef;font-weight:bold;color:#000;padding-bottom:3px;margin:6px 0;font-family: 'Waiting for the Sunrise', cursive, helvetica;font-size:1.4em;padding-left:10px;list-style: none; }
+li.list-item-style { border-bottom:1px solid #91D58F;font-weight:bold;color:#000;padding-bottom:3px;margin:10px 0;font-family: 'Waiting for the Sunrise', cursive, helvetica;font-size:1.4em;padding-left:10px;list-style: none; }
 .items-list-con { margin:0 75px;}
 .items-list-con ul { padding:0;margin:0; }
-.item-list-input { margin-left:75px;margin-right:75px;margin-top:20px; }
+.item-list-input { margin-left:75px;margin-right:75px; }
 .alt-dashbox-1 { background:#fff;min-height:150px;border:1px solid #e0e0e0;border-radius:7px;padding:0px;margin-bottom:20px;}
 .alt-dashbox-title-1 {  
-  padding:20px;
+  padding:10px;
   background:#363E45;
   border-top-right-radius:7px;
   border-top-left-radius:7px; 
-  border-bottom:1px solid #e0e0e0;
+ 
 }
-.alt-dashbox-title-1 h2 { text-align:center;margin-top:0;color:#64C756; }
+.alt-dashbox-title-1 h2 { text-align:center;margin:0;color:#fff; }
+.icon-large { font-size:1.2em; }
+.icon-tab { 
+  background:#363E45;
+  padding:5px 10px;
+  margin:5px;
+  border-bottom-right-radius:7px;
+  border-bottom-left-radius:7px;
+  color:#777;
+  font-weight:bold;
+  font-size:1.3em;
+  border-top:1px solid #444;
+}
 
 
 
+textarea.lister, input.lister, textarea.lister:focus, input.lister[type="text"]:focus, input.lister[type="password"]:focus, input.lister[type="datetime"]:focus, input.lister[type="datetime-local"]:focus, input.lister[type="date"]:focus, input.lister[type="month"]:focus, input.lister[type="time"]:focus, input.lister[type="week"]:focus, input.lister[type="number"]:focus, input.lister[type="email"]:focus, input.lister[type="url"]:focus, input.lister[type="search"]:focus, input.lister[type="tel"]:focus, input.lister[type="color"]:focus, .uneditable-input.lister:focus {   
+  border-top-color:#FFFA9B;
+  border-right-color:#FFFA9B;
+  border-left-color:#FFFA9B;
+  border-bottom-color: #e3dd6f;
+  box-shadow: 0 0px 0px #222;
+  outline: 0 none;
+  background-color:#FFFA9B;
+  border-radius:0;
+  font-size:1.3em;
+}
 
 
 // Set the correct sprite paths
