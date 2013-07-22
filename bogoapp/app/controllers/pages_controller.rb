@@ -41,5 +41,9 @@ class PagesController < ApplicationController
   def privacy_agreement 
 
   end
+
+  def tutorials
+
+  end
   
 end

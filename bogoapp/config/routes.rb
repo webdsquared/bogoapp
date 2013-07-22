@@ -2,6 +2,11 @@ Bogoapp::Application.routes.draw do
 
 
 
+  mount RedactorRails::Engine => '/redactor_rails'
+
+  resources :posts
+
+
   resources :links
 
 
@@ -14,8 +19,8 @@ Bogoapp::Application.routes.draw do
 
 
   resources :notes
-
-
+  match "tutorials", to: "pages#tutorials", as: "tutorials"
+  match "terms-of-service", to: "pages#terms_of_service", as: "terms"
   get "pages/sign_in"
   match 'sign-in', to: 'pages#sign_in', as: 'sign_in'
   get "pages/home_alt"

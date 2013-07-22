@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap-datepicker
 //= require twitter/bootstrap
+//= require redactor-rails
 //= require linker
 //= require_tree .

@@ -1,0 +1,72 @@
+
+
+<div class="alt-pg-container">
+  <% if user_signed_in? %>
+  <%= render "pages/header_logged_in" %>
+  <% else %>
+  <%= render "pages/header_logged_out" %>
+  <% end %>
+
+  <div class="container-narrow">
+    <div class="blog-container-title">
+      <h2>Bogo<span class="white">fy</span> Blog</h2>
+    </div>
+    <div class="blog-container-main">
+      <div class="row-fluid">
+        <div class="span8">
+          <div class="post-container">
+            <h3><%= link_to "This Is A Blog Post", "#", class: "green-link" %></h3>
+            <p>Posted by Pamela on June 23, 2013 in Coupons</p>
+            <div class="text-box">
+              <p>His et docendi menandri conceptam, id velit definiebas sed, mea voluptaria neglegentur cu. Cu elit oporteat facilisi sea, vis ne indoctum vituperatoribus. Suas oporteat ut sed, eum dico tamquam platonem et. Diam veniam munere quo no. Nam id sonet laudem eleifend, fuisset sapientem ius at, cetero quaerendum per an.</p>
+              <p>His et docendi menandri conceptam, id velit definiebas sed, mea voluptaria neglegentur cu. Cu elit oporteat facilisi sea, vis ne indoctum vituperatoribus. Suas oporteat ut sed, eum dico tamquam platonem et. Diam veniam munere quo no. Nam id sonet laudem eleifend, fuisset sapientem ius at, cetero quaerendum per an.</p>
+            </div>
+          </div>
+        </div>
+        <div class="span4">
+          <div class="sidebar-container">
+            <h4>Recent Posts</h4>
+            <p>This Is A Blog Post</p>
+          </div>
+          <div class="sidebar-container">
+            <h4>Categories</h4>
+            <p>Coupons</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Publish on</th>
+    <th>Body</th>
+    <th>Status</th>
+    <th>Published</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= post.publish_on %></td>
+    <td><%= post.body %></td>
+    <td><%= post.status %></td>
+    <td><%= post.published %></td>
+    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>
+</div>

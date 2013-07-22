@@ -48,7 +48,11 @@
         </div>
         <div class="span4 savings">
           <p>Average Savings:</p>
+          <% if @recent_transactions.blank? %>
+          <h3>0%</h3>
+          <% else %>
           <h3><%= number_to_percentage total_average.ceil, precision: 0 %></h3>
+          <% end %>
         </div>
       </div>
     </div>
@@ -221,9 +225,11 @@
               </li>
             <% end %>
             </ul>
+            <% if @recent_transactions.present? %>
             <div class="transaction-all">
               <p><%= link_to "View all transactions", "#", class: "green-link" %></p>
             </div>
+            <% end %>
           </div>
         </div>
         <div class="alt-dashbox">

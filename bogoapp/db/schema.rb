@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627162455) do
+ActiveRecord::Schema.define(:version => 20130722021818) do
 
   create_table "identities", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(:version => 20130627162455) do
   create_table "notes", :force => true do |t|
     t.text     "content"
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.datetime "publish_on"
+    t.text     "body"
+    t.string   "status"
+    t.boolean  "published"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
