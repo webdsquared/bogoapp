@@ -455,35 +455,39 @@ textarea.lister, input.lister, textarea.lister:focus, input.lister[type="text"]:
   background:#363E45;
   border-top-left-radius:7px;
   border-top-right-radius:7px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top:20px;
+  padding-bottom:20px;
   padding-left:20px;
   margin-top:20px;
   border-right:1px solid #e0e0e0;
   border-top:1px solid #e0e0e0;
   border-left:1px solid #e0e0e0;
 }
-.blog-container-title h2 {
+.blog-container-title h1 {
   color:#64C756;
 }
 .blog-container-main {
   background:white;
   border-bottom-right-radius:7px;
   border-bottom-left-radius:7px;
-  padding:20px 20px 40px 20px;
+  padding:20px 20px 40px 50px;
   border-right:1px solid #e0e0e0;
   border-bottom:1px solid #e0e0e0;
   border-left:1px solid #e0e0e0;
 }
 .post-container {
-  margin-right:50px;
+  margin-right:0px;
+  border-bottom:25px solid #f9f9f9;
+  margin-bottom:30px;
 }
-.post-container h3 {
+.post-title {
   margin-bottom:0;
+  font-size:2.5em;
 }
-.post-container p {
-  margin-top:0;
+.post-detail {
+  margin-top:3px;
   color:#999;
+  font-size:.85em;
 }
 .text-box {
   padding-top:10px;
@@ -493,10 +497,38 @@ textarea.lister, input.lister, textarea.lister:focus, input.lister[type="text"]:
   color:#323232;
 }
 .sidebar-container {
-  padding-top:10px;
-  padding-bottom:20px;
+  margin-left:40px;
+  padding-bottom:15px;
 }
 
+.sidebar-container ul { margin-left:0; }
+.sidebar-container ul li { list-style-type:none; }
+.search-container { margin-top:30px;padding-left:40px;}
+.continue { text-transform:uppercase;font-weight:bold; }
+.btn-continue {
+  display: inline-block;
+  *display: inline;
+  padding: 6px 8px;
+  margin-bottom: 0;
+  margin-top:10px;
+  *margin-left: .3em;
+  font-size: 11px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  /*text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);*/
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #64C756;
+  *background-color: #64C756;
+  text-shadow: 0 1px 1px rgba(155, 155, 155, 0.75);
+  text-decoration:none;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  border:none;
+}
+h3.modalHeader { font-size:1.0em;text-align:center; }
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");

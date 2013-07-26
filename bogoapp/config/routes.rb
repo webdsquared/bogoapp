@@ -1,9 +1,19 @@
 Bogoapp::Application.routes.draw do
 
+  resources :blogs
 
 
-  mount RedactorRails::Engine => '/redactor_rails'
+  
 
+  resources :administrators
+
+
+  resources :categories
+
+  
+  
+
+  match "posts/category" => "posts#category"
   resources :posts
 
 
@@ -13,7 +23,7 @@ Bogoapp::Application.routes.draw do
   resources :lists do
     resources :items
   end
-
+  
 
   resources :transactions
 
@@ -33,7 +43,7 @@ Bogoapp::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  root to: "pages#home"
+  
 
   resources :relationships, only: [:create, :destroy]
 
@@ -42,6 +52,13 @@ Bogoapp::Application.routes.draw do
       get :following, :followers
     end
   end
+  root to: "pages#home"
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  mount RedactorRails::Engine => '/redactor_rails'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

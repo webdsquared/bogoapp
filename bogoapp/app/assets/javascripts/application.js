@@ -15,5 +15,5 @@
 //= require bootstrap-datepicker
 //= require twitter/bootstrap
 //= require redactor-rails
-//= require linker
+//= require linker	
 //= require_tree .

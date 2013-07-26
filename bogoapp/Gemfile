@@ -23,7 +23,7 @@ group :assets do
 	gem "less-rails"
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', "2.3.0"
 gem 'omniauth-facebook'
 gem 'omniauth-identity'
 gem 'bootstrap-datepicker-rails'
@@ -32,11 +32,12 @@ gem 'prawn'
 gem 'redactor-rails'
 gem "carrierwave"
 gem "mini_magick"
+gem "activeadmin"
+# gem "jquery-ui-rails"
 # gem "rails_autolink", "~> 1.1.0"
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
+gem 'bcrypt-ruby', :require => 'bcrypt'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

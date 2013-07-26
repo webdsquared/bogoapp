@@ -2,7 +2,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.search(params[:search])
+    @all_categories = Category.order("name asc")
+    @recent_posts = Post.order("created_at desc")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +82,17 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def category
+    @posts = Post.search(params[:search])
+    @all_categories = Category.order("name asc")
+    @recent_posts = Post.order("created_at desc")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
+
 end

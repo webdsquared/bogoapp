@@ -41,7 +41,7 @@
           <%= form_for @note, id: "note-form" do |f| %>
             <%= f.text_area :content, placeholder: "Add a note...", rows: 3, id: "noteContent", class: "input-block-level" %>
           <div class="note-submit">
-            <%= f.submit "Add Note", class: "note-green-btn enableOnInput", id: "note-dis", disabled: "disabled" %>
+            <%= f.submit "Add Note", class: "note-green-btn enableOnInput", id: "note-dis", disabled: "disabled" %> &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Shorten your links with bitly.com", "https://bitly.com", class: "cancel", target: "_blank" %>
             <span class="counter pull-right count-number"></span>
           </div>
           <% end %>

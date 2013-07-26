@@ -1,84 +1,308 @@
-
 <% if user_signed_in? %>
-
-
 <% @user ||= current_user %>
-
-<div class="hm-header">
+<div class="alt-pg-container">
+  <%= render "header_logged_in" %>
   
-    <h4><%= link_to_unless_current "Home", root_path %> | <%= link_to "Profile", current_user %> | <%= link_to "Sign out", signout_path, id: "sign_out" %></h4>
-  
-</div>
-
-<div class="container-narrow hm-main-container">
-  <div class="row-fluid">
-    <div class="span4">
-      <%= render "home_side" %>
+  <div class="container-narrow">
+    <div class="alt-profile-container-top">
+      <div class="row-fluid">
+        <div class="span6">
+          <%= image_tag "bogologo.jpg", class: "profile-img" %>
+          <h3><%= current_user.name %></h3>
+          <p class="town">Spring Hill, TN</p>
+        </div>
+        <div class="span6">
+          <ul class="inline pull-right">
+            <li>
+              <div class="profile-list-borderless">
+                <h3 class=""><%= current_user.notes.count %></h3>
+                <p>Notes</p>
+              </div>
+            </li>
+            <li>
+              <div class="profile-list">
+                <h3><%= @user.followed_users.count %></h3>
+                <p>Following</p>
+              </div>
+            </li>
+            <li>
+              <div class="profile-list">
+                <h3><%= @user.followers.count %></h3>
+                <p>Followers</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="span8">
-      <%= render "home_main" %>
+    <div class="alt-profile-container-bottom">
+      <div class="row-fluid">
+        <div class="span8">
+          <%= form_for @note, id: "note-form" do |f| %>
+            <%= f.text_area :content, placeholder: "Add a note...", rows: 3, id: "noteContent", class: "input-block-level" %>
+          <div class="note-submit">
+            <%= f.submit "Add Note", class: "note-green-btn enableOnInput", id: "note-dis", disabled: "disabled" %>
+            <span class="counter pull-right count-number"></span>
+          </div>
+          <% end %>
+        </div>
+        <div class="span4 savings">
+          <p>Average Savings:</p>
+          <% if @recent_transactions.blank? %>
+          <h3>0%</h3>
+          <% else %>
+          <h3><%= number_to_percentage total_average.ceil, precision: 0 %></h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-narrow">
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <div class="row-fluid">
+              <div class="span8">
+                <h4>Shopping Lists</h4>
+              </div>
+              <div class="span4 dropdown arrow-right">
+                <a class="dropdown-toggle add-button pull-right" data-toggle="dropdown" href="#"><i class="icon-plus"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                  <div class="dropdown1-container">
+                    <%= form_for @list, html: { class: "form-inline", id: "list-form" } do |f| %>
+                      <div class="list-input">
+                        <label>List Name</label>
+                        <%= f.text_field :name, placeholder: "List Name" %>
+                      </div>
+                      <div class="submit-container">
+                        <%= f.submit "Add List", class: "note-green-btn" %><span class="pull-right cancel-link"><%= link_to "Cancel", "#", class: "cancel" %></span>
+                      </div>
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+              </div>
+            </div>    
+          </div>
+          <div class="alt-shopping-list-container">
+            <ul>
+            <% for list in @shopping_lists %>
+              <% if list.items.count > 1 %>
+                <li>
+                <%= link_to list.name, list, class: "dark-link" %>
+                <span class="item-count">(<%= list.items.count %> <%= "Item".pluralize %>)</span>
+                <span class="pull-right">
+                  <%= link_to list, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+              <% elsif list.items.count == 1 %>
+                <li>
+                <%= link_to list.name, list, class: "dark-link" %>
+                <span class="item-count">(<%= list.items.count %> Item)</span>
+                <span class="pull-right">
+                  <%= link_to list, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+              <% elsif list.items.count == 0 %>
+                <li>
+                <%= link_to list.name, list, class: "dark-link" %>
+                <span class="item-count">(<%= list.items.count %> <%= "Item".pluralize %>)</span>
+                <span class="pull-right">
+                  <%= link_to list, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li> 
+              <% end %>
+              
+            <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <div class="row-fluid">
+              <div class="span8">
+                <h4>Quick Links</h4>
+              </div>
+              <div class="span4 dropdown arrow-right">
+                <a class="dropdown-toggle add-button pull-right" data-toggle="dropdown" href="#"><i class="icon-plus"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li>
+                    <div class="dropdown1-container">
+                      <%= form_for @link, html: { class: "form-inline", id: "list-form" } do |f| %>
+                      <div class="list-input">
+                        <label>Link Name</label>
+                        <%= f.text_field :link_name, placeholder: "Link Name" %>
+                      </div>
+                      <div class="list-input">
+                        <label>Link URL</label>
+                        <%= f.text_field :link_url, placeholder: "http://example.com" %>
+                      </div>
+                      <div class="submit-container">
+                        <%= f.submit "Add Link", class: "note-green-btn" %>
+                        <span class="pull-right cancel-link"><%= link_to "Cancel", "#", class: "cancel" %>
+                        </span>
+                      </div>
+                      <% end %>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="alt-quick-link-container">
+            <ul>
+            <% for link in @link_list %>
+              <li>
+                <%= link_to link.link_name, link.link_url, target: "_blank", class: "dark-link" %>
+                <span class="pull-right">
+                  <%= link_to link, method: :delete do %>
+                    <i class="icon-remove gray"></i>
+                  <% end %>
+                </span>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="span8">
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <div class="row-fluid">
+              <div class="span8">
+                <h4>Recent Transactions</h4>
+              </div>
+              <div class="span4 dropdown arrow-right">
+                <a class="dropdown-toggle add-button pull-right" data-toggle="dropdown" href="#"><i class="icon-plus"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li>
+                    <div class="dropdown1-container">
+                      <%= form_for @transaction, html: {id: "list-form"} do |f| %>
+                        <div class="list-input input-prepend">
+                          <label>Transaction Date</label>
+                          <div class="input-prepend">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                            <%= f.text_field :date, id: "datepicker", placeholder: "Date" %>
+                          </div>
+                        </div>
+                        <div class="list-input">
+                          <label>Amount Spent</label>
+                          <div class="input-prepend">
+                            <span class="add-on">$</span>
+                            <%= f.text_field :spent, placeholder: "Spent" %>
+                          </div>
+                        </div>
+                        <div class="list-input input-prepend">
+                          <label>Amount Saved</label>
+                          <div class="input-prepend">
+                            <span class="add-on">$</span>
+                            <%= f.text_field :saved, placeholder: "Saved" %>
+                          </div>
+                        </div>
+                        <div class="submit-container">
+                          <%= f.submit "Add Transaction", class: "note-green-btn" %><span class="pull-right cancel-link"><%= link_to "Cancel", "#", class: "cancel" %></span>
+                        </div>
+                      <% end %>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="alt-recent-transaction-list">
+            <ul>
+            <% for transaction in @recent_transactions %>
+              <li>
+                You spent <span class="transaction-list-bold"><%= number_to_currency transaction.spent %></span> at Piggly Wiggly on <%= transaction.date.strftime("%b %-d") %> and saved <span class="transaction-list-bold"><%= number_to_currency transaction.saved %></span> (<span class="transaction-list-green"><%= number_to_percentage transaction.average_savings_per_transaction.ceil, precision: 0 %></span>).
+              </li>
+            <% end %>
+            </ul>
+            <% if @recent_transactions.present? %>
+            <div class="transaction-all">
+              <p><%= link_to "View all transactions", "#", class: "green-link" %></p>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="alt-dashbox">
+          <div class="alt-dashbox-title">
+            <h4>Recent Activity</h4>
+          </div>
+          <div class="alt-activity-container">
+            <!-- RECENT ACTIVITY FEED -->
+            <% for note in @home_feed %>
+            <div class="alt-note-container">
+              <div class="row-fluid">
+                <div class="span1">
+                  <%= image_tag "bogologo.jpg", size: "40x40" %>
+                </div>
+                <div class="span11 recent-note">
+                  
+                  <!-- MODAL SECTION -->
+                  
+                  <h5>
+                    <% if note.user != current_user %>
+                    <%= link_to note.user.name, "#myModal-#{note.id}", class: "note-name", data: { toggle: "modal" } %>
+                    <span class="pull-right gray-time"><%= time_ago_in_words(note.created_at) %></span>
+                    <% else %>
+                    <%= note.user.name %>
+                    <span class="pull-right gray-time"><%= time_ago_in_words(note.created_at) %></span>
+                    <% end %>
+                  </h5>
+                  
+
+                    <div id="myModal-<%= note.id %>" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel" class="modalHeader">Profile Summary</h3>
+                      </div>
+                      <div class="modal-body">
+                        <p><%= note.user.name %></p>
+                        <% note.user.notes.each do |note| %>
+                        <p class="text"><%= note.content %></p>
+                        <% end %>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+
+                    <!-- MODAL SECTION END -->
+
+                    <p class="text"><%= note.content %></p>
+                    <div class="note-nav">
+                      <% if note.user == current_user %>
+                      <span class="gray"><%= link_to(raw('<i class="icon-trash"></i> Delete'), "#", class: "dark-link") %></span>
+                      <% else %>
+                      <span class="gray"><i class="icon-share-alt"></i> Reply</span>
+                      <span class="icon-pad"></span>
+                      <% end %>
+                    </div>
+                
+
+                </div>
+              </div>
+            </div>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <% else %>
-
-
-<div class="home-basic">
-<div class="container">
-  <div class="row">
-    <div class="span6">
-      <h1>Bogofy</h1>
-      <h3>The social media app for couponers.</h3>
-      <p>Track, update, and share with friends and others about your couponing expertise or valuable coupons.</p>
-      <%= link_to "JOIN NOW", new_identity_path, class: "btn btn-large" %>
-      <%= link_to "LOGIN", "#", class: "btn btn-large" %>
-      <br><br>
-      <p>Sign in with <%= link_to "Facebook", "/auth/facebook", id: "sign_in" %>.</p>
-    </div>
-    <div class="span6">
-
-    </div>
-  </div>
+<div class="alt-pg-container">
+<%= render "header_logged_out" %>
+<h3>You need to login!</h3>
 </div>
-
-
-
-<div class="clouds-container">
-  <div class="top-border">
-    &nbsp;
-  </div>
-  <div class="cloud">
-
-   <div class="container">
-<div id="user_nav">
-  <% if current_user %>
-    Signed in as <strong><%= current_user.name %></strong>! | 
-    <%= link_to "View Profile", current_user %> | 
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
-</div>
-Don't use facebook? 
-<%= link_to "Create an account", new_identity_path %> or login below.
-
-Sign in with email and password...
-
-<%= form_tag "/auth/identity/callback" do %>
-  <div class="field">
-    <%= label_tag :auth_key, "Email" %><br>
-    <%= text_field_tag :auth_key %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions"><%= submit_tag "Login" %></div>
-<% end %>
-</div>
-  </div>
-</div>
-</div>
-
-
 <% end %>
