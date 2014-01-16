@@ -1,0 +1,11 @@
+<% if profile.image_url.blank? %>
+<%= image_tag "profile.jpg", class: "default-profile-image" %>
+<% else %>
+<%= image_tag profile.image_url, class: "default-profile-image" %>
+<% end %>
+<h3>#<%= profile.player_number %> <%= "#{profile.player_first_name} #{profile.player_last_name}" %></h3>
+
+<% if profile.player_favorite_team.present? %>
+<p><strong>Favorite sports team:</strong></p>
+<p><%= profile.player_favorite_team %></p>
+<% end %>

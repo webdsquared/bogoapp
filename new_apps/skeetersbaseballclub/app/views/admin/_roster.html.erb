@@ -1,0 +1,90 @@
+<div class="roster-container">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="roster-left-container">
+				<div class="row">
+					<div class="col-md-10">
+						<h2 class="schedule-container-title">Roster</h2>
+						<small class="text-muted">Click on the players name to view their profile.</small>
+					</div>
+					<div class="col-md-2">
+					<p class="text-right"><%= link_to "Add Profile", "#", id: "profile-form-trigger", class: "btn btn-primary" %>	</p>
+					</div>
+				</div>
+				<ul class="menu">
+					<% @profile_list.each do |profile|  %>
+						<li><%= link_to "##{profile.player_number} #{profile.player_first_name} #{profile.player_last_name}", profile, remote: true %></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-4">
+
+			<div class="create-profile-form">
+				<h3>Create Player Profile</h3>
+
+				<%= form_for @profile, html: {multipart: true} do |f| %>
+					<div class="form-group">
+						<label class="sr-only">First Name</label>
+						<%= f.text_field :player_first_name, placeholder: "First Name", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Last Name</label>
+						<%= f.text_field :player_last_name, placeholder: "Last Name", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Profile Image</label>
+						<%= f.file_field :image %>
+						<p class="help-block">Upload player profile image.</p>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Jersey Number</label>
+						<%= f.text_field :player_number, placeholder: "Jersey Number", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite Team</label>
+						<%= f.text_field :player_favorite_team, placeholder: "Favorite Team", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite Player</label>
+						<%= f.text_field :player_favorite_player, placeholder: "Favorite Player", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite School Subject</label>
+						<%= f.text_field :player_favorite_subject, placeholder: "Favorite School Subject", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Career</label>
+						<%= f.text_field :player_career, placeholder: "Career", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite Song</label>
+						<%= f.text_field :player_favorite_song, placeholder: "Favorite Song", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite Book</label>
+						<%= f.text_field :player_favorite_book, placeholder: "Favorite Book", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite Movie</label>
+						<%= f.text_field :player_favorite_movie, placeholder: "Favorite Movie", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Favorite Food</label>
+						<%= f.text_field :player_favorite_food, placeholder: "Favorite Food", class: "form-control" %>
+					</div>
+	
+					<div><%= f.submit "Add Profile", class: "btn btn-primary" %></div>
+	
+				<% end %>
+			</div>
+
+			<div class="profile-container">
+				<div class="profile-view"></div>
+			</div>
+
+			
+
+		</div>
+	</div>
+</div>

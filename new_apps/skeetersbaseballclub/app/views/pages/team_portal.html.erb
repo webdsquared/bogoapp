@@ -1,0 +1,22 @@
+<div id="portal-wrap">
+<h1 class="login-pg-text">Skeeters Baseball Club</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<p class="text-center"><%= image_tag "skeeter_bw.png" %></p>
+		</div>
+		<div class="col-md-6">
+			<div class="team-options-container">
+				<h2>Select a Team</h2>
+				<% for team in @teams %>
+				<!--<div class="team-options">
+					<h3>Team Name</h3>
+				</div> -->
+				<%= link_to team.name, team, class: "team-portal-link" %>
+
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

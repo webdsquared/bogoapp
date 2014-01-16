@@ -1,0 +1,176 @@
+body, html { height:100%; }
+
+body { background-color:#F5F5F5; }
+.page-wrap { background:white;padding:20px 40px;border:1px solid #ddd; }
+
+#portal-wrap { background:#242628;padding-top:30px; }
+
+/*body { background:#242628; } */
+/* body { background:#f5f5f5; } */
+
+#wrap { min-height:100%;height:auto;margin:0 auto -60px;padding:0 0 60px; }
+#footer { height:60px;background:#555;}
+/* HEADER PARTIAL */
+.header-container { /*background:#242628;*/background:#fff; }
+.home-login-container { padding:15px;width:300px;background:#F8F8F8; }
+
+/* DEDICATED LOGIN PAGE */
+.login-pg-text { font-family: 'Sonsie One', cursive;color:#111;font-size:5.0em;text-align:center;margin-bottom:60px;margin-top:50px;text-shadow: 0px 1px 1px #444; }
+.login-form-box { margin:0 auto;padding-top:30px;margin-bottom:30px; }
+.login-form-box p { color:#666;margin-top:15px; }
+input#dark-input:not([type=submit]):not([type=file]) {
+   background:#333333;border-color:#333333;color:#ddd;box-shadow:none; }
+
+/* HOME */
+.sub-container { background:white;margin-top:0px;min-height:500px; }
+.top-container { padding:40px;background:#101E34;}
+.carousel { border:5px solid #eee;}
+
+
+.w100 { width:100%; }
+
+.slider-sidetext { }
+.slider-sidetext h2 { font-weight:300;margin-top:0;border-bottom:1px solid #eee; }
+.slider-sidetext p { font-size:16px;font-weight:400;}
+
+/* ADMIN DASHBOARD */
+.dashboard-header { }
+.dashboard-box { background:#fff;padding:0 25px 0 25px; }
+.player-number h1 { text-align:center;margin-top:0; }
+
+
+.schedule-container { padding-top:20px;min-height:500px; }
+.schedule-container-title { margin-bottom:10px;margin-top:0;}
+.schedule-an-event-container {  }
+.schedule-an-event-container p { margin-right:10px;float:left;}
+
+.send-invite-form { padding-top:20px;border-top:1px solid #ddd; }
+#send-invite-button { margin-top:5px;}
+
+.type-game { background:#777777;display:inline;color:#fff;padding:4px 6px; }
+.type-practice { background:#ddd;display:inline;color:#111;padding:4px 6px; }
+
+.add-game-form { border:1px solid #ddd;padding:20px; }
+.cancel { cursor:pointer;color:#428bca;float:right;font-size:.5em;padding-top:10px; }
+.cancel-btm { cursor:pointer;color:#428bca;float:right;padding-top:10px; }
+
+.add-practice-form { border:1px solid #ddd;padding:20px; }
+
+.upcoming-events-container { padding:0px;padding-top:20px;min-height:500px; }
+
+.new-post-form { padding:20px 10px;border-bottom:1px solid #e1e1e1; }
+.new-post-link { text-align:center;background:#1071BE;color:#fff;cursor:pointer; }
+.full-schedule-link { text-align:center;background:#555555;color:#fff; }
+.updates-container { padding-top:20px;}
+
+.header-bar { background:#EBECEC;padding:0px; }
+.header-bar p { text-transform:uppercase;padding:9px;margin:0;font-weight:bold; }
+
+.admin-post-container { padding-bottom:10px; }
+.admin-post-details { color:#888;font-size:1.0em;margin-bottom:0; }
+.admin-post-title { color:#000;font-size:1.7em;margin-top:0px;margin-bottom:8px; }
+.admin-dashboard-events { padding-bottom:15px; }
+
+.no-btm { margin-bottom:0;}
+
+.blue { color:#1071BE; }
+
+
+.dashboard-event-container { border-bottom:1px solid #ddd; }
+.dashboard-event-container p { margin-bottom:0;padding:10px 0; }
+.dashboard-team-name { margin-bottom:30px; }
+.upcoming-events-side { }
+.team-admins { border-left:1px solid #ccc;border-bottom:1px solid #ccc;padding:20px;border-top:1px solid #ccc;border-right:1px solid #ddd;}
+.team-admins h3 { margin:0 0 8px 0; }
+.team-admins p { margin-bottom:8px; }
+
+.invitation-container { margin-top:20px;border-left:1px solid #ccc;border-bottom:1px solid #ccc;padding:20px;border-top:1px solid #ccc;border-right:1px solid #ddd;}
+.invitation-container h3 { margin:0 0 8px 0; }
+.invitation-container p { margin-bottom:8px; }
+
+
+
+h4.empty { margin-top:30px;margin-bottom:40px; }
+
+
+.silver { color:#777; }
+
+.gray { color:#ccc; }
+.light { font-weight:300; }
+.default-profile-image { width:100%; }
+.profile-container { padding:0 0 20px 0;}
+.roster-container { padding-top:20px;min-height:500px; }
+.roster-left-container { margin-right:30px; }
+
+.menu { padding-left:0;list-style:none;padding-top:10px; }
+.menu li { font-size:1.4em;line-height:1.5; }
+.create-profile-form h3 { margin-top:0;margin-bottom:15px; }
+
+.events-list-header-container { background:#EEEEEE;border-bottom:1px solid #CCCCCC;border-right:1px solid #CCCCCC;border-left:1px solid #CCCCCC;border-top:2px solid #CCCCCC;margin-top:10px; }
+.events-list-header-right { border-left:1px solid #bbb; }
+.events-list-header-left h4 { margin:0;padding:5px 0 5px 10px; }
+.events-list-header-right h4 { margin:0;padding:5px 0 5px 10px; }
+
+h4.table-header { margin:0;color:black; }
+tr.gray { background:#eee;/*border-left:1px solid #ccc;border-right:1px solid #ccc;*/border-top:1px solid #ccc; }
+
+/* LANDING PAGE */
+h3.welcome-title { margin-top:0;color:#eee;font-weight:100;letter-spacing:1px;border-bottom:1px solid #333;padding-bottom:8px; }
+p.welcome-text { line-height:1.3;font-weight:300;color:#eee;letter-spacing:1px; }
+
+.sponsor-placeholder { background:#222;margin-bottom:20px; }
+.sponsor-placeholder-top { background:#222;min-height:150px;margin-bottom:20px;margin-top:10px; }
+
+.public-post-container { border-bottom:2px solid #e5e5e5;margin-bottom:20px;margin-right:40px;}
+.public-post-title	{ margin-bottom:0; }
+.public-post-details { margin-top:2px;color:#777;font-weight:300;font-style:italic;font-size:.85em; }
+h3.home-sub { font-weight:300;font-size:1.4em;color:#444;background:#eee;text-transform:uppercase;padding:5px 10px;border-bottom:2px solid #ddd; }
+
+
+
+/* TEAM PORTAL */
+.team-options-container {  }
+.team-options-container h2 { color:#111;text-shadow: 0px 1px 1px #444;font-weight:600;font-size:2.5em;text-align:center;}
+.team-options { background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #e5e5e5),
+	color-stop(0.58, #fff),
+	color-stop(1, #e5e5e5)
+);
+background-image: -o-linear-gradient(bottom, #e5e5e5 0%, #fff 58%, #e5e5e5 100%);
+background-image: -moz-linear-gradient(bottom, #e5e5e5 0%, #fff 58%, #e5e5e5 100%);
+background-image: -webkit-linear-gradient(bottom, #e5e5e5 0%, #fff 58%, #e5e5e5 100%);
+background-image: -ms-linear-gradient(bottom, #e5e5e5 0%, #fff 58%, #e5e5e5 100%);
+background-image: linear-gradient(to bottom, #e5e5e5 0%, #fff 58%, #e5e5e5 100%);border:1px solid #444;border-radius:5px;width:400px;margin:0 auto 10px auto;padding:15px; }
+.team-options h3{ margin:0;color:#146FC5;text-shadow: 0px 1px 1px #fff; }
+
+.team-portal-link { background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #DDDDDD),
+	color-stop(0.58, #EFEFEF),
+	color-stop(1, #DDDDDD)
+	);
+	background-image: -o-linear-gradient(bottom, #DDDDDD 0%, #EFEFEF 58%, #DDDDDD 100%);
+	background-image: -moz-linear-gradient(bottom, #DDDDDD 0%, #EFEFEF 58%, #DDDDDD 100%);
+	background-image: -webkit-linear-gradient(bottom, #DDDDDD 0%, #EFEFEF 58%, #DDDDDD 100%);
+	background-image: -ms-linear-gradient(bottom, #DDDDDD 0%, #EFEFEF 58%, #DDDDDD 100%);
+	background-image: linear-gradient(to bottom, #DDDDDD 0%, #EFEFEF 58%, #DDDDDD 100%);
+	border-radius:3px;
+	text-align:center;
+	width:300px;
+	background:#ddd;
+	display:block;
+	margin:20px auto 20px;
+	padding:10px 30px;
+	font-size:1.6em;
+	font-family: 'Sonsie One', cursive;
+	color:#eee;
+}
+
+
+
+

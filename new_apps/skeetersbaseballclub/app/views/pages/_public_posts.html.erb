@@ -1,0 +1,17 @@
+<% for post in @public_posts %>
+	<div class="public-post-container">
+		<h3 class="public-post-title"><%= post.title %></h3>
+		<h5 class="public-post-details">
+			Posted on <%= post.publish_on.strftime("%B %-d, %Y") %> |  
+			By: <%= "#{post.user.first_name} #{post.user.last_name}" %>
+		</h5>
+		<%= markdown(post.body) %>
+		<% if user_signed_in? && current_user.super_admin? == true %>
+		<p class="public-post-footer">
+			<%= link_to root_path, class: "btn btn-primary btn-sm" do %>
+				EDIT POST
+			<% end %>
+		</p>
+		<% end %>
+	</div>
+<% end %>

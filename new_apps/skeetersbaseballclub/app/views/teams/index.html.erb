@@ -1,0 +1,14 @@
+<h2>Teams</h2>
+<ul>
+	<% for team in @teams %>
+	<li><%= link_to team.name, team %></li>
+	<% end %>
+</ul>
+
+<%= form_for @team do |f| %>
+	<%= f.label :name %><br>
+	<%= f.text_field :name, placeholder: "Add Team Name" %><br>
+	<%= f.submit "Add Team" %>
+<% end %>
+
+

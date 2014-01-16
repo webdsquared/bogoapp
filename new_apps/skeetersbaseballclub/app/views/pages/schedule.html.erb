@@ -1,0 +1,63 @@
+<% if user_signed_in? %>
+<div class="dashboard-box">
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="dashboard-header">
+				<%= render 'partials/admin_dashboard_header' %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="row">
+				<div class="col-md-11">
+					<h1 class="dashboard-team-name">8U Skeeters</h1>
+				</div>
+				<div class="col-md-1">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<%= render "admin/dashboard_main_menu" %>
+			<div class="tab-content">
+				<%= render "admin/schedule" %>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<% else %>
+<h1 class="login-pg-text">Skeeters Baseball Club</h1>
+<p class="text-center"><%= image_tag "skeeter_bw.png" %></p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="login-form-box">
+				<%= form_for(resource, :as => resource_name, html: {class: "form-inline-login"}, :url => session_path(resource_name)) do |f| %>
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputEmail2">Email address</label>
+						<%= f.email_field :email, :autofocus => true, class: "form-control input-lg", id: "dark-input", placeholder: "Enter email", autocomplete: "off" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputPassword2">Password</label>
+						<%= f.password_field :password, class: "form-control input-lg", id: "dark-input", placeholder: "Password", autocomplete: "off" %>
+					</div>
+					<%= f.submit "Sign In", class: "btn-secondary btn-primary btn-lg-secondary" %>
+				<% end %>
+				<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+ 					<p><%= link_to "Forgot your password?", new_password_path(resource_name) %></p>
+				<% end -%>
+				<p class="text-center"><%= link_to "Continue as guest", root_path,class: "btn-secondary btn-default btn-lg-secondary" %></p>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>

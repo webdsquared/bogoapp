@@ -1,0 +1,10 @@
+<%= form_for @post do |f| %>
+	<%= f.text_field :title, placeholder: "Enter title" %><br>
+	<%= f.text_field :publish_on, paceholder: "add date", id: "datepicker" %><br>
+	<%= f.text_area :body, placeholder: "add message" %><br>
+	<%= f.submit "Add Post", name: "team_post" %>
+<% end %>
+
+<% @team.posts.each do |post| %>
+	<%= post.title %>
+<% end %>

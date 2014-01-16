@@ -1,0 +1,37 @@
+	<nav class="navbar navbar-dash" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <!--<a class="navbar-brand" href="#">Skeeters Baseball Club</a>-->
+    <%= link_to "Skeeters Baseball Club", root_path, class: "dash-brand" %>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><%= link_to "Teams", "#" %></li>
+      
+    </ul>
+    <!-- 
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  	-->
+    <ul class="nav navbar-nav navbar-right">
+      
+      
+      
+      <li><%= link_to "Logged in as #{current_user.first_name} #{current_user.last_name}", new_user_session_path %></li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>

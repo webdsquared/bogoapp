@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  player_first_name: MyString
+  player_last_name: MyString
+  player_number: MyString
+  player_favorite_team: MyString
+  player_favorite_player: MyString
+  player_favorite_subject: MyString
+  player_career: MyString
+  player_favorite_song: MyString
+  player_favorite_book: MyString
+  player_favorite_movie: MyString
+  player_favorite_food: MyString
+  player_nickname: MyString
+
+two:
+  player_first_name: MyString
+  player_last_name: MyString
+  player_number: MyString
+  player_favorite_team: MyString
+  player_favorite_player: MyString
+  player_favorite_subject: MyString
+  player_career: MyString
+  player_favorite_song: MyString
+  player_favorite_book: MyString
+  player_favorite_movie: MyString
+  player_favorite_food: MyString
+  player_nickname: MyString

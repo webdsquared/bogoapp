@@ -1,0 +1,152 @@
+<div class="schedule-container">
+	<div class="row">
+		<div class="col-md-8">
+			<h2 class="schedule-container-title">Upcoming Events</h2>
+			
+			
+
+			
+			<table class="table table-bordered">
+				<tr class="gray">
+					<td class="col-md-5">
+						<h4 class="table-header">Date and Time</h4>
+					</td>
+					<td class="col-md-7">
+						<h4 class="table-header">Event Information</h4>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-hover">
+				<% for event in @event_list %>
+				<tr>
+					<td class="col-md-2">
+						<% if event.event_type == "game" %>
+						<p class="type-game"><%= event.event_type.capitalize %></p>
+						<% elsif event.event_type == "practice" %>
+						<p class="type-practice"><%= event.event_type.capitalize %></p>
+						<% end %>
+					</td>
+					<td class="col-md-3">
+						<strong><%= event.date.strftime("%a, %b %-d") %></strong><br>
+						<%= event.start_time %> CST
+					</td>
+					<td class="col-md-7">
+						<% if event.event_type == "game" && event.home_away == "home" %>
+						<strong>vs <%= event.opponent %></strong><br>
+						<% elsif event.event_type == "game" && event.home_away == "away" %>
+						<strong>@ <%= event.opponent %></strong><br>
+						<% end %>
+						at <%= event.location %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+
+		
+		
+		</div>
+		<div class="col-md-4">
+			<div class="event-container">
+				<h2 class="schedule-container-title">Schedule An Event</h2>
+
+				<div class="schedule-an-event-container">
+					<p><%= link_to "Add Game", "#", class: "btn btn-primary", id: "open-game-form" %></p>
+					<p><%= link_to "Add Practice", "#", class: "btn btn-primary", id: "open-practice-form" %></p>
+				</div>
+			</div>
+
+			<div class="add-game-container">
+				<h2 class="schedule-container-title">Add Game <span class="cancel" id="cancel-game-btn">Cancel</span></h2>
+				<div class="add-game-form">
+					<%= form_for @event do |f| %>
+					<%= f.hidden_field :event_type, value: "game" %>
+					<div class="form-group">
+						<label class="sr-only">Date</label>
+						<%= f.text_field :date, placeholder: "Add date", class: "form-control", id: "datepicker" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Start</label>
+						<%= f.text_field :start_time, placeholder: "Start time", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Arrive</label>
+						<div class="row">
+							<div class="col-md-3">
+								<%= f.text_field :arrival, class: "form-control", placeholder: "15" %>
+							</div>
+							<div class="col-md-9">
+								minutes before (Optional)
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Opponent</label>
+						<%= f.text_field :opponent, placeholder: "Opponent", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Home or Away</label>
+						<%= f.select :home_away, options_for_select(%w[home away]), {prompt: "Select Home or Away"}, class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Game Type</label>
+						<%= f.text_field :game_type, placeholder: "Select game type", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Location</label>
+						<%= f.text_field :location, placeholder: "Add a location", class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Notes</label>
+						<%= f.text_area :notes, placeholder: "Add a note...", class: "form-control" %>
+					</div>
+					
+					<%= f.submit "Save Game", name: "save-and-close", class: "btn btn-primary" %>
+					<p class="cancel-btm" id="cancel-game-btn-btm">Cancel</p>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="add-practice-container">
+				<h2 class="schedule-container-title">Add Practice<span class="cancel" id="cancel-practice-btn">Cancel</span></h2>
+				<div class="add-practice-form">
+					<%= form_for @event do |f| %>
+					<%= f.hidden_field :event_type, value: "practice" %>
+						<div class="form-group">
+							<label class="sr-only">Date</label>
+							<%= f.text_field :date, placeholder: "Add date", class: "form-control", id: "datepicker2" %>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">Start</label>
+							<%= f.text_field :start_time, placeholder: "Start time", class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">Arrive</label>
+							<div class="row">
+								<div class="col-md-3">
+									<%= f.text_field :arrival, class: "form-control", placeholder: "15" %>
+								</div>
+								<div class="col-md-9">
+								minutes before (Optional)
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">Location</label>
+							<%= f.text_field :location, placeholder: "Add a location", class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">Notes</label>
+							<%= f.text_area :notes, placeholder: "Add a note...", class: "form-control" %>
+						</div>
+						
+						<%= f.submit "Save Practice", name: "save-and-close", class: "btn btn-primary" %>
+						<p class="cancel-btm" id="cancel-practice-btn-btm">Cancel</p>
+					<% end %>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	
+</div>

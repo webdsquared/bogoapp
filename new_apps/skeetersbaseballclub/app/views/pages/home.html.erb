@@ -1,0 +1,84 @@
+<%= render 'partials/header' %>
+<div class="top-container">
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="row">
+				<div class="col-md-7">
+					
+					<!-- BOOTSTRAP SLIDE -->
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  					<!-- Indicators -->
+  					<ol class="carousel-indicators">
+    					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+   						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  					</ol>
+
+  					<!-- Wrapper for slides -->
+  					<div class="carousel-inner">
+    					<div class="item active">
+      					<%= image_tag "skeeter_home.jpg", alt: "" %>
+      					<div class="carousel-caption">
+        					
+      					</div>
+    					</div>
+    					<div class="item">
+    						<%= link_to image_tag("bridgemore_900.jpg", alt: ""), "http://google.com", target: "_blank" %>
+    						
+    					</div>
+  					</div>
+
+  					<!-- Controls -->
+  					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    				<span class="glyphicon glyphicon-chevron-left"></span>
+  					</a>
+  					<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    				<span class="glyphicon glyphicon-chevron-right"></span>
+  					</a>
+					</div>
+					<!-- BOOTSTRAP SLIDE END -->
+				</div>
+				<div class="col-md-5">
+					<h3 class="welcome-title">Welcome to Skeeters Baseball</h3>
+					<p class="welcome-text">Lorem ipsum dolor sit amet, eum prima convenire theophrastus eu, nec doctus molestie eu, te duis cotidieque mea. Duo erant nihil alterum no, luptatum recteque postulant mel ad. An mel animal definitiones. In ornatus adipiscing omittantur eos, detracto insolens id pri. Amet oratio nec te, cu quo solum audiam officiis, accusata platonem ut qui.</p>
+					<p><%= link_to "Read more", "#", class: "btn btn-primary btn-sm" %></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="sub-container">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<div class="row">
+					<div class="col-md-7">
+						<h3 class="home-sub">Updates</h3>
+						<%= render "public_posts" %>
+					</div>
+					<div class="col-md-5">
+						<h3 class="home-sub">Our Sponsors </h3>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="sponsor-placeholder">
+									<%= image_tag "bridgemore_600.jpg", class: "w100" %>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="sponsor-placeholder"></div>
+							</div>
+							<div class="col-md-6">
+								<div class="sponsor-placeholder"></div>
+							</div>
+						<div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h3><%= link_to "Sigm Up", new_user_registration_path %></h3>
+

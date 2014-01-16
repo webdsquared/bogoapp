@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs">
+	<li class="<%= is_active?(dashboard_path) %>"><%= link_to "Team News", dashboard_path %></li>
+	<li class="<%= is_active?(schedule_path) %>"><%= link_to "Schedule", schedule_path %></li>
+  <li class="<%= is_active?(roster_path) %>"><%= link_to "Roster", roster_path %></li>
+</ul>
